@@ -1,0 +1,2 @@
+# mynpmbox
+useful npm package
