@@ -12,7 +12,6 @@
   "author": "myworldbox",
   "license": "ISC",
   "dependencies": {
-    "mynpmbox": "^1.0.7",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
