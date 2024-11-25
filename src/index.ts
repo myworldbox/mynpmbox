@@ -1,5 +1,5 @@
 import Transform from "./util/transform";
 
-module.exports = {
+export default {
     Transform
 }
