@@ -1,8 +1,9 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.15",
+  "version": "1.0.18",
   "description": "myworldbox",
-  "types": "src/type.d.ts",
+  "main": "dist/index.js",
+  "types": "src/global/type.d.ts",
   "scripts": {
     "restart": "npx kill-port 8000",
     "start": "yarn restart && ts-node src/index.ts",

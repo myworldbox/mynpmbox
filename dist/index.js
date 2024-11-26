@@ -1,4 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Transform = void 0;
 const transform_1 = require("./util/transform");
-exports.default = { Transform: transform_1.Transform };
+Object.defineProperty(exports, "Transform", { enumerable: true, get: function () { return transform_1.Transform; } });
