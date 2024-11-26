@@ -1,5 +1,3 @@
-import Transform from "./util/transform";
+import { Transform } from "./util/transform";
 
-export default {
-    Transform
-}
+export default { Transform }

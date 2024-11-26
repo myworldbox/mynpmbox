@@ -10,7 +10,12 @@
     "strict": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "paths": {
+      "src/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",

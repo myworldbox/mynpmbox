@@ -1,13 +1,14 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.9",
-  "description": "",
-  "main": "src/index.ts",
+  "version": "1.0.15",
+  "description": "myworldbox",
+  "types": "src/type.d.ts",
   "scripts": {
     "restart": "npx kill-port 8000",
     "start": "yarn restart && ts-node src/index.ts",
     "dev": "yarn restart && nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "myworldbox",
   "license": "ISC",
