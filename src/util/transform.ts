@@ -32,7 +32,7 @@ export const Transform = {
 
         return object
     },
-    
+
     async array_to_json(array: any) {
         if (!Array.isArray(array) || array.length === 0) {
             return []
@@ -51,17 +51,17 @@ export const Transform = {
         });
     },
 
-    object_filter(from: any, to: any): any {
+    object_filter(original_object: any, filter_object: any): any {
         const filteredObject: any = {};
 
-        for (let key in to) {
-            if (Object.prototype.hasOwnProperty.call(from, key)) {
-                if (Array.isArray(to[key]) && Array.isArray(from[key])) {
-                    filteredObject[key] = to[key];
-                } else if (typeof to[key] === 'object' && typeof from[key] === 'object') {
-                    filteredObject[key] = this.object_filter(from[key], to[key]);
+        for (let key in filter_object) {
+            if (Object.prototype.hasOwnProperty.call(original_object, key)) {
+                if (Array.isArray(filter_object[key]) && Array.isArray(original_object[key])) {
+                    filteredObject[key] = filter_object[key];
+                } else if (typeof filter_object[key] === 'object' && typeof original_object[key] === 'object') {
+                    filteredObject[key] = this.object_filter(original_object[key], filter_object[key]);
                 } else {
-                    filteredObject[key] = to[key];
+                    filteredObject[key] = filter_object[key];
                 }
             }
         }
@@ -69,21 +69,21 @@ export const Transform = {
         return filteredObject;
     },
 
-    remove_tail_pattern(str: any, pattern: any) {
-        return String(str).slice(0, -pattern.length);
+    remove_tail_text(text: any, pattern: any) {
+        return String(text).slice(0, -pattern.length);
     },
 
-    repeat_trim(input: string, length: number) {
-        const inputLength = input.length;
+    repeat_trim(text: string, length: number) {
+        const textLength = text.length;
 
-        if (inputLength === length) {
-            return input;
-        } else if (inputLength < length) {
-            const repetitions = Math.ceil(length / inputLength);
-            const repeatedString = input.repeat(repetitions);
+        if (textLength === length) {
+            return text;
+        } else if (textLength < length) {
+            const repetitions = Math.ceil(length / textLength);
+            const repeatedString = text.repeat(repetitions);
             return repeatedString.slice(0, length);
         } else {
-            return input.slice(0, length);
+            return text.slice(0, length);
         }
     },
 
