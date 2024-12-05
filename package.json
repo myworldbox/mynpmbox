@@ -1,6 +1,6 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.20",
+  "version": "1.0.22",
   "description": "myworldbox",
   "main": "dist/index.js",
   "types": "src/global/type.d.ts",
