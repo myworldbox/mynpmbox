@@ -1,24 +1,41 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.24",
-  "description": "myworldbox",
+  "version": "1.0.25",
+  "description": "A utility toolbox for modern JavaScript/TypeScript development",
   "main": "dist/index.js",
-  "types": "src/global/type.d.ts",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./@run": "./util/run.ts",
+    "./@transform": "./util/run.ts",
+    "./@enum": "./util/run.ts"
+  },
   "scripts": {
+    "build": "tsc --build",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --watch src --exec \"ts-node src/index.ts\"",
     "restart": "npx kill-port 8000",
-    "start": "yarn restart && ts-node src/index.ts",
-    "dev": "yarn restart && nodemon src/index.ts",
+    "prestart": "npm run restart",
+    "predev": "npm run restart",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "prepare": "npm run build"
   },
   "author": "myworldbox",
   "license": "ISC",
-  "dependencies": {
+  "keywords": [
+    "typescript",
+    "utilities",
+    "toolbox"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myworldbox/mynpmbox.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.9.3",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
-  },
-  "devDependencies": {
-    "@types/node": "^22.9.3"
   }
 }

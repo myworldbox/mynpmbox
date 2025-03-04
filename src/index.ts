@@ -1,5 +1,3 @@
-import { Enum } from "./util/enum";
-import { Transform } from "./util/transform";
-import { Run } from "./util/run";
-
-export { Enum, Transform, Run }
+export * from "./util/enum";
+export * from "./util/transform";
+export * from "./util/run";
