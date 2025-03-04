@@ -1,14 +1,14 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.25",
+  "version": "1.0.27",
   "description": "A utility toolbox for modern JavaScript/TypeScript development",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./index.ts",
-    "./@run": "./util/run.ts",
-    "./@transform": "./util/run.ts",
-    "./@enum": "./util/run.ts"
+    ".": "./dist/index.js",
+    "./@run": "./dist/util/run.js",
+    "./@transform": "./dist/util/transform.js",
+    "./@enum": "./dist/util/enum.js"
   },
   "scripts": {
     "build": "tsc --build",
@@ -31,7 +31,8 @@
     "type": "git",
     "url": "git+https://github.com/myworldbox/mynpmbox.git"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "@types/node": "^22.9.3",
     "nodemon": "^3.1.7",

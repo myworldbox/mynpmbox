@@ -1,5 +1,5 @@
 export const Transform = {
-    Get_obj_at_node: async (node: string, object: any): Promise<{ [key: string]: any } | undefined> =>
+    get_obj_at_node: async (node: string, object: any): Promise<{ [key: string]: any } | undefined> =>
         node.split('.').reduce((obj, key) => (obj && key in obj ? obj[key] : undefined), object),
 
     set_obj_at_node: async (node: string, object: any, value: any): Promise<{ [key: string]: any }> => {
