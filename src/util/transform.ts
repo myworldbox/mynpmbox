@@ -1,93 +1,62 @@
 export const Transform = {
-
-    async get_obj_at_node(node: string, object: any): Promise<{ [key: string]: any } | undefined> {
-        const keys = node.split('.');
-        let obj = object;
-
-        for (const key of keys) {
-            if (obj && typeof obj === 'object' && key in obj) {
-                obj = obj[key];
-            } else {
-                return undefined;
-            }
-        }
-
-        return obj // Return the found value
+    async get_obj_at_node(node: string, object: object): Promise<{ [key: string]: any } | undefined> {
+        return node.split('.').reduce((obj, key) => (obj && key in obj ? obj[key] : undefined), object);
     },
 
-    async set_obj_at_node(node: string, object: any, value: any): Promise<{ [key: string]: any }> {
+    async set_obj_at_node(node: string, object: object, value: any): Promise<{ [key: string]: any }> {
         const keys = node.split('.');
         let obj = object;
-
-        for (let i = 0; i < keys.length - 1; i++) {
-            const key = keys[i];
-            if (!(key in obj) || typeof obj[key] !== 'object') {
-                obj[key] = {}; // Create an empty object if the key doesn't exist
-            }
-            obj = obj[key];
+        for (const key of keys.slice(0, -1)) {
+            obj = obj[key] = obj[key] && typeof obj[key] === 'object' ? obj[key] : {};
         }
-
-        // Set the value at the specified key
         obj[keys[keys.length - 1]] = value;
-
-        return object
+        return object;
     },
 
-    async array_to_json(array: any) {
-        if (!Array.isArray(array) || array.length === 0) {
-            return []
-        }
-
-        const [columnNames, ...rows] = array;
-
-        return rows.map((row: any) => {
-            const jsonObject: any = {};
-            columnNames.forEach((columnName: any, index: any) => {
-                if (row[index] !== undefined) {
-                    jsonObject[columnName] = row[index];
-                }
-            });
-            return jsonObject;
-        });
+    async array_to_json(array: any[]) {
+        if (!Array.isArray(array) || !array.length) return [];
+        const [cols, ...rows] = array;
+        return rows.map(row => Object.fromEntries(cols.map((col, i) => [col, row[i]]).filter(([_, v]) => v !== undefined)));
     },
 
-    object_filter(original_object: any, filter_object: any): any {
-        const filteredObject: any = {};
-
-        for (let key in filter_object) {
-            if (Object.prototype.hasOwnProperty.call(original_object, key)) {
-                if (Array.isArray(filter_object[key]) && Array.isArray(original_object[key])) {
-                    filteredObject[key] = filter_object[key];
-                } else if (typeof filter_object[key] === 'object' && typeof original_object[key] === 'object') {
-                    filteredObject[key] = this.object_filter(original_object[key], filter_object[key]);
-                } else {
-                    filteredObject[key] = filter_object[key];
-                }
+    object_filter(original: object, filter: object): any {
+        return Object.keys(filter).reduce((acc, key) => {
+            if (key in original) {
+                acc[key] = Array.isArray(filter[key]) && Array.isArray(original[key])
+                    ? filter[key]
+                    : typeof filter[key] === 'object' && typeof original[key] === 'object'
+                        ? this.object_filter(original[key], filter[key])
+                        : filter[key];
             }
+            return acc;
+        }, {});
+    },
+
+    remove_pattern_at_index(text: string, pattern: string, index: number): string {
+        if (index < 0) {
+            index = text.length + index;
         }
-
-        return filteredObject;
+        const start = text.slice(0, index);
+        const end = text.slice(index + pattern.length);
+        return start + end;
     },
 
-    remove_tail_text(text: any, pattern: any) {
-        return String(text).slice(0, -pattern.length);
+    repeat_trim(text: string, length: number): string {
+        const len = text.length;
+        return len === length ? text : text.repeat(Math.ceil(length / len)).slice(0, length);
     },
 
-    repeat_trim(text: string, length: number) {
-        const textLength = text.length;
-
-        if (textLength === length) {
-            return text;
-        } else if (textLength < length) {
-            const repetitions = Math.ceil(length / textLength);
-            const repeatedString = text.repeat(repetitions);
-            return repeatedString.slice(0, length);
-        } else {
-            return text.slice(0, length);
-        }
+    json_to_array(json: object): string[] {
+        return Object.values(json).map(v => typeof v === 'string' ? v : JSON.stringify(v));
     },
 
-    json_to_array(json: any) {
-        return Object.values(json).map(value => (typeof value != 'string') ? JSON.stringify(value) : value)
+    pattern_a_to_b(text: string, pattern_a: string, pattern_b: string): string {
+        return text.split(pattern_a).join(pattern_b)
+    },
+
+    capitalize_at_index(str: string, index: number): string {
+        const words = str.split(' ');
+        const i = index < 0 ? words.length + index : index;
+        return i < 0 || i >= words.length ? str : words.map((w, j) => j === i ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ');
     }
-}
+};
