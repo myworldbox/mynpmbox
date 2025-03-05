@@ -6,3 +6,5 @@ export const Run = {
         await Promise.all(functions.map(func => func()));
     }
 }
+
+export const { sequential, concurrent } = Run

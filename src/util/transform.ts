@@ -48,3 +48,15 @@ export const Transform = {
         return i < 0 || i >= words.length ? str : words.map((w, j) => j === i ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ');
     }
 }
+
+export const {
+    get_obj_at_node,
+    set_obj_at_node,
+    array_to_json,
+    object_filter,
+    remove_pattern_at_index,
+    repeat_trim,
+    json_to_array,
+    pattern_a_to_b,
+    capitalize_at_index,
+} = Transform
