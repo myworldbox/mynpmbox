@@ -1,6 +1,6 @@
 {
   "name": "mynpmbox",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "A utility toolbox for modern JavaScript/TypeScript development",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -3,6 +3,13 @@ enum status {
     fail
 }
 
+enum crud {
+    create,
+    read,
+    update,
+    delete
+}
+
 enum method {
     get,
     post,
@@ -104,6 +111,7 @@ enum special_symbol {
 
 export const Enum = {
     status,
+    crud,
     method,
     sql,
     special_symbol
@@ -111,6 +119,7 @@ export const Enum = {
 
 export {
     status,
+    crud,
     method,
     sql,
     special_symbol
